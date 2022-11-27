@@ -55,6 +55,15 @@ public class NavigationPanel {
   }
 
   public Component getComponent() {
+    JPanel propertiesPanel = new JPanel(new SpringLayout());
+    Box valueBox = Box.createHorizontalBox();
+    AbstractAction myOnEarliestBeginToggle=null;
+    valueBox.add(Box.createHorizontalStrut(10));
+    valueBox.add(Box.createHorizontalStrut(5));
+    //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
+    JButton button = new JButton("Change date");
+    propertiesPanel.add(button);
+    propertiesPanel.add(valueBox);
     return new ToolbarBuilder()
         .withDpiOption(myDpiOption)
         .withLafOption(myLafOption, new Function<String, Float>() {
@@ -69,8 +78,8 @@ public class NavigationPanel {
         .addComboBox(myScrollActions, myScrollActions[1])
         .button(myScrollBackAction).withAutoRepeat(200).add()
         .button(myScrollForwardAction).withAutoRepeat(200).add()
-        .build()
-        .getToolbar();
+            .addPanel(propertiesPanel).build()
+        .getToolbar();//;
   }
 
 }
