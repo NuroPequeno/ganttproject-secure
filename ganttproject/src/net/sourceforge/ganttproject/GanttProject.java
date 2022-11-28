@@ -677,6 +677,14 @@ public class GanttProject extends GanttProjectBase implements ResourceView, Gant
         .addButton(new TestGanttRolloverButton(getCopyAction().asToolbarAction()))
         .addButton(new TestGanttRolloverButton(getPasteAction().asToolbarAction()))
         .addWhitespace()
+    .addWhitespace()
+    .addWhitespace()
+    .addWhitespace()
+	.addButton(new TestGanttRolloverButton(myEditMenu.getUndoAction().asToolbarAction()))
+    .addWhitespace()
+    .addWhitespace()
+    .addWhitespace()
+    .addWhitespace()
         .addButton(new TestGanttRolloverButton(myEditMenu.getUndoAction().asToolbarAction()))
         .addButton(new TestGanttRolloverButton(myEditMenu.getRedoAction().asToolbarAction()));
 

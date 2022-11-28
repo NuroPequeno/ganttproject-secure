@@ -25,13 +25,15 @@ import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.action.scroll.*;
 import net.sourceforge.ganttproject.chart.TimelineChart;
 import net.sourceforge.ganttproject.gui.UIFacade;
+import net.sourceforge.ganttproject.gui.UIUtil;
 
 import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-public class NavigationPanel {
+import org.jdesktop.swingx.JXDatePicker;
+public class NavigationPanel{
   private final TimelineChart myChart;
   private final IGanttProject myProject;
 
@@ -55,16 +57,25 @@ public class NavigationPanel {
   }
 
   public Component getComponent() {
-    JPanel propertiesPanel = new JPanel(new SpringLayout());
-    Box valueBox = Box.createHorizontalBox();
-    AbstractAction myOnEarliestBeginToggle=null;
-    valueBox.add(Box.createHorizontalStrut(10));
-    valueBox.add(Box.createHorizontalStrut(5));
+    SpringLayout layout = new SpringLayout();
+    SpringLayout anotherLayout = new SpringLayout();
+    final JPanel calendarPanel = new JPanel(anotherLayout);
+    calendarPanel.setPreferredSize(new Dimension(150, 20));
     //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
-    String name = "Change date";
-    final JButton button = new JButton(name);
+    Box valueBox = Box.createHorizontalBox();
+    JXDatePicker dateChanger = UIUtil.createDatePicker();
+    final JPanel propertiesPanel = new JPanel(layout);
+    propertiesPanel.setPreferredSize(new Dimension(50, 20));
+    propertiesPanel.setLayout(layout);
+    //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
+    final JButton button = new JButton("Change date");
     propertiesPanel.add(button);
-    propertiesPanel.add(valueBox);
+    valueBox.add(dateChanger);
+    calendarPanel.add(valueBox, anotherLayout);
+    calendarPanel.setLayout(anotherLayout);
+    propertiesPanel.setVisible(true);
+    calendarPanel.setVisible(true);
+    propertiesPanel.setLayout(layout);
     button.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent evt) {
@@ -79,13 +90,17 @@ public class NavigationPanel {
             return (s.indexOf("nimbus") >= 0) ? 2f : 1f;
           }
         })
+            .addPanel(calendarPanel)
+            .addWhitespace()
+            .addWhitespace()
         .withHeight(24)
         .withGapFactory(ToolbarBuilder.Gaps.VDASH)
         .withBackground(myChart.getStyle().getSpanningHeaderBackgroundColor())
-        .addComboBox(myScrollActions, myScrollActions[1])
+            .addComboBox(myScrollActions, myScrollActions[1])
         .button(myScrollBackAction).withAutoRepeat(200).add()
         .button(myScrollForwardAction).withAutoRepeat(200).add()
-            .addPanel(propertiesPanel).build()
+            .addPanel(propertiesPanel)
+            .build()
         .getToolbar();//;
   }
 }
