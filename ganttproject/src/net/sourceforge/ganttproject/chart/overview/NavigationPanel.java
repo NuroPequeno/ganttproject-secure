@@ -25,15 +25,13 @@ import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.action.scroll.*;
 import net.sourceforge.ganttproject.chart.TimelineChart;
 import net.sourceforge.ganttproject.gui.UIFacade;
-import net.sourceforge.ganttproject.gui.UIUtil;
+import org.jdesktop.swingx.JXDatePicker;
 
 import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import org.jdesktop.swingx.JXDatePicker;
-public class NavigationPanel{
+import net.sourceforge.ganttproject.gui.UIUtil;
+public class NavigationPanel {
   private final TimelineChart myChart;
   private final IGanttProject myProject;
 
@@ -42,7 +40,8 @@ public class NavigationPanel{
   private final AbstractAction myScrollForwardAction;
   private final IntegerOption myDpiOption;
   private final GPOption<String> myLafOption;
-  public NavigationPanel (IGanttProject project, TimelineChart chart, UIFacade uiFacade) {
+
+  public NavigationPanel(IGanttProject project, TimelineChart chart, UIFacade uiFacade) {
     myProject = project;
     myChart = chart;
     myScrollActions = new AbstractAction[] { new ScrollToStartAction(myProject, myChart),
@@ -57,31 +56,15 @@ public class NavigationPanel{
   }
 
   public Component getComponent() {
-    SpringLayout layout = new SpringLayout();
-    SpringLayout anotherLayout = new SpringLayout();
-    final JPanel calendarPanel = new JPanel(anotherLayout);
-    calendarPanel.setPreferredSize(new Dimension(150, 20));
-    //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
+    JPanel propertiesPanel = new JPanel();
+    JPanel propertiesPanel2 = new JPanel();
     Box valueBox = Box.createHorizontalBox();
-    JXDatePicker dateChanger = UIUtil.createDatePicker();
-    final JPanel propertiesPanel = new JPanel(layout);
-    propertiesPanel.setPreferredSize(new Dimension(50, 20));
-    propertiesPanel.setLayout(layout);
-    //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
-    final JButton button = new JButton("Change date");
-    propertiesPanel.add(button);
+    JXDatePicker dateChanger=UIUtil.createDatePicker();
     valueBox.add(dateChanger);
-    calendarPanel.add(valueBox, anotherLayout);
-    calendarPanel.setLayout(anotherLayout);
-    propertiesPanel.setVisible(true);
-    calendarPanel.setVisible(true);
-    propertiesPanel.setLayout(layout);
-    button.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent evt) {
-      }
-    });
-
+    propertiesPanel2.add(valueBox);
+    JLabel label = new JLabel("Change date:");
+    propertiesPanel.add(label,BorderLayout.WEST);
+    //propertiesPanel.add(valueBox,BorderLayout.EAST);
     return new ToolbarBuilder()
         .withDpiOption(myDpiOption)
         .withLafOption(myLafOption, new Function<String, Float>() {
@@ -90,17 +73,17 @@ public class NavigationPanel{
             return (s.indexOf("nimbus") >= 0) ? 2f : 1f;
           }
         })
-            .addPanel(calendarPanel)
-            .addWhitespace()
-            .addWhitespace()
         .withHeight(24)
         .withGapFactory(ToolbarBuilder.Gaps.VDASH)
         .withBackground(myChart.getStyle().getSpanningHeaderBackgroundColor())
-            .addComboBox(myScrollActions, myScrollActions[1])
+        .addComboBox(myScrollActions, myScrollActions[1])
         .button(myScrollBackAction).withAutoRepeat(200).add()
         .button(myScrollForwardAction).withAutoRepeat(200).add()
-            .addPanel(propertiesPanel)
-            .build()
-        .getToolbar();//;
+        .addPanel(propertiesPanel)
+        .withGapFactory(ToolbarBuilder.Gaps.RIGID)
+        .addPanel(propertiesPanel2)
+        .build()
+        .getToolbar();
   }
+
 }
