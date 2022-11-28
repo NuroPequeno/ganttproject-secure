@@ -29,7 +29,8 @@ import net.sourceforge.ganttproject.gui.UIFacade;
 import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.*;
+import java.io.*;
 public class NavigationPanel {
   private final TimelineChart myChart;
   private final IGanttProject myProject;
@@ -39,8 +40,7 @@ public class NavigationPanel {
   private final AbstractAction myScrollForwardAction;
   private final IntegerOption myDpiOption;
   private final GPOption<String> myLafOption;
-
-  public NavigationPanel(IGanttProject project, TimelineChart chart, UIFacade uiFacade) {
+  public NavigationPanel (IGanttProject project, TimelineChart chart, UIFacade uiFacade) {
     myProject = project;
     myChart = chart;
     myScrollActions = new AbstractAction[] { new ScrollToStartAction(myProject, myChart),
@@ -61,9 +61,16 @@ public class NavigationPanel {
     valueBox.add(Box.createHorizontalStrut(10));
     valueBox.add(Box.createHorizontalStrut(5));
     //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
-    JButton button = new JButton("Change date");
+    String name = "Change date";
+    final JButton button = new JButton(name);
     propertiesPanel.add(button);
     propertiesPanel.add(valueBox);
+    button.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent evt) {
+      }
+    });
+
     return new ToolbarBuilder()
         .withDpiOption(myDpiOption)
         .withLafOption(myLafOption, new Function<String, Float>() {
@@ -81,5 +88,4 @@ public class NavigationPanel {
             .addPanel(propertiesPanel).build()
         .getToolbar();//;
   }
-
 }
