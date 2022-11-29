@@ -91,7 +91,7 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
   private final GPAction myLinkTasksAction;
 
   private final GPAction myUnlinkTasksAction;
-
+  private final GPAction myTimeAlertAction;
   private boolean isOnTaskSelectionEventProcessing;
 
   private Highlighter myDragHighlighter;
@@ -167,8 +167,9 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
     myUnindentAction = new TaskUnindentAction(taskManager, selectionManager, uiFacade, this);
     myMoveUpAction = new TaskMoveUpAction(taskManager, selectionManager, uiFacade, this);
     myMoveDownAction = new TaskMoveDownAction(taskManager, selectionManager, uiFacade, this);
+    myTimeAlertAction = new TaskTimeAlertAction(taskManager, selectionManager, uiFacade, this);
     getTreeTable().setupActionMaps(myMoveUpAction, myMoveDownAction, myIndentAction, myUnindentAction, newAction,
-        myProject.getCutAction(), myProject.getCopyAction(), myProject.getPasteAction(), propertiesAction, deleteAction);
+    myProject.getCutAction(), myProject.getCopyAction(), myProject.getPasteAction(), propertiesAction, deleteAction, myTimeAlertAction);
   }
 
   @Override
@@ -540,7 +541,7 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
   public AbstractAction[] getTreeActions() {
     if (myTreeActions == null) {
       myTreeActions = new AbstractAction[] { myUnindentAction, myIndentAction, myMoveUpAction, myMoveDownAction,
-          myLinkTasksAction, myUnlinkTasksAction };
+          myLinkTasksAction, myUnlinkTasksAction, myTimeAlertAction};
     }
     return myTreeActions;
   }
@@ -549,7 +550,7 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
   public void addToolbarActions(ToolbarBuilder builder) {
     builder.addButton(myUnindentAction.asToolbarAction()).addButton(myIndentAction.asToolbarAction())
         .addButton(myMoveUpAction.asToolbarAction()).addButton(myMoveDownAction.asToolbarAction())
-        .addButton(myLinkTasksAction.asToolbarAction()).addButton(myUnlinkTasksAction.asToolbarAction());
+        .addButton(myLinkTasksAction.asToolbarAction()).addButton(myUnlinkTasksAction.asToolbarAction()).addButton(myTimeAlertAction.asToolbarAction());
   }
 
   @Override

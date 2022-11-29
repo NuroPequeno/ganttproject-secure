@@ -5,8 +5,6 @@
 -ganttproject-tester/build/tmp/jar/MANIFEST.MF,1\f\1f967233c625b8f83141a6085ab1e7662c473bf7
 [
 +.gradle/buildOutputCleanup/cache.properties,f\0\f0ce9208a20ebd9d1f763074c5870c3f31ef115a
-p
-@ganttproject-builder/.gradle/buildOutputCleanup/cache.properties,d\e\deb4443c6bf8abe36300f4c90ce729d505601bd8
 i
 9ganttproject-builder/.gradle/vcsWorkingDirs/gc.properties,c\a\ca172340f9cb921eb7085ba5e34ff84e65ac4f48
 `
@@ -41,8 +39,6 @@ Yganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/chart.
 bganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/keyboard.macos.properties,c\4\c4e4961b5b938be45cb14f14919c81708a3d1b70
 â
 Yganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/icons.properties,9\f\9ff9b97fbfc805bfaa5f8ad889a7c22c14f6372d
-è
-_ganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/fontawesome.properties,e\a\ead32dd500dca22a6b68cfacd6e4bd8467c1ed9a
 â
 Yganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/mouse.properties,1\c\1cbf88d2a0d94366dc599ae6dbfcc14cefbc8e64
 è
