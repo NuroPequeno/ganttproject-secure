@@ -30,6 +30,7 @@ import org.jdesktop.swingx.JXDatePicker;
 import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import net.sourceforge.ganttproject.gui.UIUtil;
 public class NavigationPanel {
   private final TimelineChart myChart;
@@ -59,12 +60,17 @@ public class NavigationPanel {
     JPanel propertiesPanel = new JPanel();
     JPanel propertiesPanel2 = new JPanel();
     Box valueBox = Box.createHorizontalBox();
-    JXDatePicker dateChanger=UIUtil.createDatePicker();
+    final JXDatePicker dateChanger=UIUtil.createDatePicker();
+    dateChanger.addActionListener(new ActionListener(){
+      @Override
+      public void actionPerformed(ActionEvent e) {
+      myChart.setStartDate(dateChanger.getDate());
+    }
+    });
     valueBox.add(dateChanger);
     propertiesPanel2.add(valueBox);
     JLabel label = new JLabel("Change date:");
     propertiesPanel.add(label,BorderLayout.WEST);
-    //propertiesPanel.add(valueBox,BorderLayout.EAST);
     return new ToolbarBuilder()
         .withDpiOption(myDpiOption)
         .withLafOption(myLafOption, new Function<String, Float>() {
