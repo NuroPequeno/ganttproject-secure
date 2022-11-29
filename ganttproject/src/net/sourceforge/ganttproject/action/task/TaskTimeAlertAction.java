@@ -14,13 +14,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.*;
+import java.awt.*;
 
 public class TaskTimeAlertAction extends TaskActionBase{
 
     final UIFacade myUIFacade;
+    private GanttTree2 tree;
     public TaskTimeAlertAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade, GanttTree2 tree) {
         super("task.timealert", taskManager, selectionManager, uiFacade, tree);
         myUIFacade = uiFacade;
+        this.tree = tree;
     }
     @Override
     protected String getIconFilePrefix() {
@@ -38,14 +41,23 @@ public class TaskTimeAlertAction extends TaskActionBase{
         // compare end date to todays date
         List<Date> endDates = new ArrayList<>();
         GanttCalendar calendar;
-        //System.out.print("1");
-        JPanel P = new JPanel();
-        myUIFacade.showPopupMenu(P, en, 100,100);
+        JPopupMenu menu = new JPopupMenu();
+        Component c = tree.getTreeComponent();
+        menu.show(c,100,100);
+        int i = 0;
         for(Task t: selection){
             calendar =  t.getEnd();
+            JLabel label = new JLabel(t.getName());
+            menu.add(label);
+            label.setLocation(0,30*i);
+            i++;
+            /*if() {
+
+            }*/
 
 
         }
+        menu.setPopupSize(200, 350);
         //getSelectionManager().fireSelectionChanged();
 
     }
