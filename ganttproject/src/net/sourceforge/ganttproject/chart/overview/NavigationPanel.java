@@ -27,6 +27,7 @@ import net.sourceforge.ganttproject.chart.TimelineChart;
 import net.sourceforge.ganttproject.gui.UIFacade;
 import net.sourceforge.ganttproject.gui.UIUtil;
 
+
 import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
