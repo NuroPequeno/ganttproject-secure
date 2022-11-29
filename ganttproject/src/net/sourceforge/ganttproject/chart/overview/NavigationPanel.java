@@ -65,6 +65,7 @@ public class NavigationPanel{
     calendarPanel.setPreferredSize(new Dimension(150, 20));
     //propertiesPanel.add(new JLabel(language.getText("earliestBegin")));
     Box valueBox = Box.createHorizontalBox();
+
     JXDatePicker dateChanger = UIUtil.createDatePicker();
     final JPanel propertiesPanel = new JPanel(layout);
     propertiesPanel.setPreferredSize(new Dimension(50, 20));
