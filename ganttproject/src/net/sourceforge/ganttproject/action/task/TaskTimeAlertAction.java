@@ -16,7 +16,13 @@ import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
+import java.util.GregorianCalendar;
+import java.util.Comparator;
+import java.util.Collections;
+
+
 public class TaskTimeAlertAction extends TaskActionBase{
+
 
     final UIFacade myUIFacade;
     private GanttTree2 tree;
@@ -40,21 +46,39 @@ public class TaskTimeAlertAction extends TaskActionBase{
         //TODO Get all selected tasks and check end date
         // compare end date to todays date
         List<Date> endDates = new ArrayList<>();
-        GanttCalendar calendar;
+
+
+        Comparator<Task> endDateComparator = new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getEnd().compareTo(o2.getEnd());
+            }
+        };
+
+        //Sort tasks by end date
+        Collections.sort(selection, endDateComparator);
+
+        GanttCalendar endDate;
+        GregorianCalendar now = new GregorianCalendar();
+
         JPopupMenu menu = new JPopupMenu();
         Component c = tree.getTreeComponent();
         menu.show(c,100,100);
         int i = 0;
+
         for(Task t: selection){
-            calendar =  t.getEnd();
-            JLabel label = new JLabel(t.getName());
-            menu.add(label);
-            label.setLocation(0,30*i);
-            i++;
-            /*if() {
+            endDate =  t.getEnd();
 
-            }*/
+            GregorianCalendar GregorianEnd = (GregorianCalendar)endDate;
+            long diff = (GregorianEnd.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24)+1;
 
+            if(t.getCompletionPercentage()<100) {
+                //interessante mostrar também a percentagem do progresso
+                JLabel label = new JLabel(t.getName()+"  |  "+t.getCompletionPercentage()+"  |  "+diff);
+                menu.add(label);
+                label.setLocation(0, 30 * i);
+                i++;
+            }
 
         }
         menu.setPopupSize(200, 350);
@@ -77,4 +101,6 @@ public class TaskTimeAlertAction extends TaskActionBase{
         result.setEnabled(this.isEnabled());
         return result;
     }
+
+
 }
