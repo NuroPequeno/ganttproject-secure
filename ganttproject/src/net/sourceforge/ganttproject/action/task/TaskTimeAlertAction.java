@@ -45,21 +45,34 @@ public class TaskTimeAlertAction extends TaskActionBase{
         Component c = tree.getTreeComponent();
         menu.show(c,100,100);
         int i = 0;
+        JLabel label1 = new JLabel("Task in order to prescribe:");
+        menu.add(label1);
+        label1.setLocation(0,0);
+        label1.setForeground(Color.blue);
+
+        JSeparator separator = new JSeparator(){
+            @Override
+            public Dimension getMaximumSize(){
+                return new Dimension(400, 5);
+            }
+
+        };
+        menu.add(separator);
+        separator.setLocation(0,35);
+        separator.setForeground(Color.gray);
+
         for(Task t: selection){
             calendar =  t.getEnd();
-            JLabel label = new JLabel(t.getName());
-            menu.add(label);
-            label.setLocation(0,30*i);
+            JLabel label = new JLabel(t.getName()); // escrever na etiqueta o nome da tarefa
+            menu.add(label); // adicionar a terefa
+            label.setLocation(0,40+30*i); // 30 tamanho da altura das letras + 30 descer trinta
             i++;
             /*if() {
 
             }*/
-
-
         }
         menu.setPopupSize(200, 350);
         //getSelectionManager().fireSelectionChanged();
-
     }
 
     @Override
