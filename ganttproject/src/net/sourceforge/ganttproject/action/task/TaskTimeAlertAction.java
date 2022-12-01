@@ -41,64 +41,7 @@ public class TaskTimeAlertAction extends TaskActionBase{
         return !selection.isEmpty();
     }
 
-    @Override
-    protected void run(List<Task> selection) throws Exception {
-        //TODO Get all selected tasks and check end date
-        // compare end date to todays date
-        List<Date> endDates = new ArrayList<>();
-
-
-        Comparator<Task> endDateComparator = new Comparator<Task>() {
-            @Override
-            public int compare(Task o1, Task o2) {
-                return o1.getEnd().compareTo(o2.getEnd());
-            }
-        };
-
-        //Sort tasks by end date
-        Collections.sort(selection, endDateComparator);
-
-        GanttCalendar endDate;
-        GregorianCalendar now = new GregorianCalendar();
-
-        JPopupMenu menu = new JPopupMenu();
-        Component c = tree.getTreeComponent();
-        menu.show(c,100,100);
-        int i = 0;
-        JLabel label1 = new JLabel("Task in order to prescribe:");
-        menu.add(label1);
-        label1.setLocation(0,0);
-        label1.setForeground(Color.blue);
-
-        JSeparator separator = new JSeparator(){
-            @Override
-            public Dimension getMaximumSize(){
-                return new Dimension(400, 5);
-            }
-
-        };
-        menu.add(separator);
-        separator.setLocation(0,35);
-        separator.setForeground(Color.gray);
-
-        for(Task t: selection){
-            endDate =  t.getEnd();
-
-            GregorianCalendar GregorianEnd = (GregorianCalendar)endDate;
-            long diff = (GregorianEnd.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24)+1;
-
-            if(t.getCompletionPercentage()<100) {
-                //interessante mostrar também a percentagem do progresso
-                JLabel label = new JLabel(t.getName()+"  |  "+t.getCompletionPercentage()+"  |  "+diff);
-                menu.add(label);
-                label.setLocation(0,40+30*i); // 30 tamanho da altura das letras + 30 descer trinta
-                i++;
-            }
-
-        }
-        menu.setPopupSize(200, 350);
-        //getSelectionManager().fireSelectionChanged();
-    }
+    
 
     @Override
     public TaskTimeAlertAction asToolbarAction(){
@@ -131,7 +74,8 @@ public class TaskTimeAlertAction extends TaskActionBase{
     }
 
 
-    /*
+
+
      @Override
     protected void run(List<Task> selection) throws Exception {
 
@@ -141,24 +85,52 @@ public class TaskTimeAlertAction extends TaskActionBase{
         Component c = tree.getTreeComponent();
         menu.show(c,250,50);
 
+
+         Comparator<Task> endDateComparator = new Comparator<Task>() {
+             @Override
+             public int compare(Task o1, Task o2) {
+                 return o1.getEnd().compareTo(o2.getEnd());
+             }
+         };
+         //Sort tasks by end date
+         Collections.sort(selection, endDateComparator);
+
+
+
         int j = 0;
         int i = 0;
 
         //menu.add(showLineSeparator(0,35));
 
         String[][] rec = new String[selection.size()][3];
-        String[] header = {"name", "completed", "days left"};
+        String[] header = {"name", "completion %", "days left"};
+
+
+        GanttCalendar endDate;
+        GregorianCalendar now = new GregorianCalendar();
 
 
         for(Task t: selection){
             j= 0;
-            calendar =  t.getEnd();
+            endDate =  t.getEnd();
 
-            //JLabel label = new JLabel(t.getName()); // escrever na etiqueta o nome da tarefa
+            GregorianCalendar GregorianEnd = (GregorianCalendar)endDate;
+            long diff = (GregorianEnd.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24)+1;
 
-            rec[i][j++] = t.getName();
-            rec[i][j] = String.valueOf(t.getCompletionPercentage());
-            rec[i][j++] = String.valueOf(calendar.getDate());
+                 //JLabel label = new JLabel(t.getName()); // escrever na etiqueta o nome da tarefa
+
+                 //only display not completed tasks
+                 if(t.getCompletionPercentage()<100) {
+                     rec[i][j++] = t.getName();
+                     rec[i][j++] = String.valueOf(t.getCompletionPercentage());
+                     if(diff>0) {
+                         rec[i][j++] = String.valueOf(diff);
+                     } else if(diff==0){
+                         rec[i][j++] = "today!";
+                     } else {
+                         rec[i][j++] = "behind!";
+                     }
+                 }
 
 
             //label.setLocation(0,40+30*i); // 30 tamanho da altura das letras + 30 descer trinta
@@ -179,6 +151,6 @@ public class TaskTimeAlertAction extends TaskActionBase{
 
         menu.setPopupSize(350, 200);
     }
-     */
+
 
 }
