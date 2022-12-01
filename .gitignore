@@ -52,7 +52,5 @@ org.ganttproject.impex.htmlpdf/
 
 #gant/
 ganttproject-tester/
-ganttproject-builder/*
-.gradle/
+gradle/
 *.DS_Store
-ganttproject-builder/
