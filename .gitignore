@@ -21,6 +21,8 @@
 *.zip
 *.tar.gz
 *.rar
+*.bin
+*.lock
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -34,8 +36,7 @@ vscode/
 biz/
 org/
 build/
-ganttproject-builder/
-.gradle/
+*.gradle/
 .idea/
 
 #biz/
@@ -51,6 +52,7 @@ org.ganttproject.impex.htmlpdf/
 
 #gant/
 ganttproject-tester/
-ganttproject-builder/
-
+ganttproject-builder/*
+.gradle/
 *.DS_Store
+ganttproject-builder/
