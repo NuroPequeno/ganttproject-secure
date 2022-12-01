@@ -116,5 +116,69 @@ public class TaskTimeAlertAction extends TaskActionBase{
         return result;
     }
 
+    private JSeparator showLineSeparator(int x, int y){
+        JSeparator separator = new JSeparator(){
+            @Override
+            public Dimension getMaximumSize(){
+                return new Dimension(400, 5);
+            }
+
+        };
+
+        separator.setLocation(x,y);
+        separator.setForeground(Color.gray);
+        return separator;
+    }
+
+
+    /*
+     @Override
+    protected void run(List<Task> selection) throws Exception {
+
+        List<Date> endDates = new ArrayList<>();
+        GanttCalendar calendar;
+        JPopupMenu menu = new JPopupMenu();
+        Component c = tree.getTreeComponent();
+        menu.show(c,250,50);
+
+        int j = 0;
+        int i = 0;
+
+        //menu.add(showLineSeparator(0,35));
+
+        String[][] rec = new String[selection.size()][3];
+        String[] header = {"name", "completed", "days left"};
+
+
+        for(Task t: selection){
+            j= 0;
+            calendar =  t.getEnd();
+
+            //JLabel label = new JLabel(t.getName()); // escrever na etiqueta o nome da tarefa
+
+            rec[i][j++] = t.getName();
+            rec[i][j] = String.valueOf(t.getCompletionPercentage());
+            rec[i][j++] = String.valueOf(calendar.getDate());
+
+
+            //label.setLocation(0,40+30*i); // 30 tamanho da altura das letras + 30 descer trinta
+            //menu.add(panel);
+            i++;
+
+        }
+
+
+
+        JTable table = new JTable(rec,header);
+        //table.setRowSelectionAllowed(true);
+
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        table.setEnabled(false);
+        menu.add(table);
+        menu.add(new JScrollPane(table));
+
+        menu.setPopupSize(350, 200);
+    }
+     */
 
 }
