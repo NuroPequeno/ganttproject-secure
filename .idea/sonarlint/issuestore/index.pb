@@ -1,6 +1,4 @@
 
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 ]
 -ganttproject-tester/build/tmp/jar/MANIFEST.MF,1\f\1f967233c625b8f83141a6085ab1e7662c473bf7
 [
@@ -14,15 +12,9 @@ K
 I
 .gradle/7.3/gc.properties,5\6\565ce97bcd0ca48f1d31fdc56816980bdc8ad2e9
 ^
-.ganttproject-builder/build/tmp/jar/MANIFEST.MF,8\7\87e6c224b585aa203f6c9d1468028f6eaff282a7
-c
-3ganttproject-builder/build/kotlin-build/version.txt,2\9\29aab3034f796a63bab78b2128a53b666679d9ea
-^
 .ganttproject-builder/dist-bin/ganttproject.bat,8\f\8f1895dbebb5124e5719bca12a89b6b362a69c6f
 Z
 *ganttproject-builder/dist-bin/ganttproject,9\1\9127e120d8c930d069460f3acef8d7ef74fd319f
-j
-:ganttproject-builder/build/tmp/updateEclipsito/MANIFEST.MF,0\d\0deb06a6683143d6bc31252a5884a86c28058a0e
 e
 5ganttproject-builder/dist-bin/HouseBuildingSample.gan,4\d\4d3eb7371ce292338d878608ec9118826176c0e8
 b
@@ -47,17 +39,5 @@ _ganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/mouse.
 \ganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/keyboard.properties,2\4\245181d9bfb3a6f28e6361eaa07eff7ff88620ba
 Ü
 Vganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/data/resources/ui.properties,5\2\52986c6d2c6e56595e6518ca5a575d4ae60d8aec
-ê
-`ganttproject-builder/dist-bin/plugins-2.8.10/biz.ganttproject.impex.msproject2/lib/mspdi_fix.xsl,e\b\ebffa3795a102b6302a289ca40e15d2139f627b0
-}
-Mganttproject-builder/dist-bin/plugins-2.8.10/biz.ganttproject.core/plugin.xml,a\c\acd93eae3d1f8774b3d91d06fb1effa7fa6753c2
-É
-Sganttproject-builder/dist-bin/plugins-2.8.10/biz.ganttproject.impex.ical/plugin.xml,7\9\793f4c27631f863f1aefe07ee57472130a353e72
-â
-Yganttproject-builder/dist-bin/plugins-2.8.10/biz.ganttproject.impex.msproject2/plugin.xml,9\c\9c6a56a4e9014f50b5321b706a7c40ce44a1b7c3
 t
 Dganttproject-builder/dist-bin/plugins-2.8.10/ganttproject/plugin.xml,8\2\821c8442af89476691986309edf7c6963bab7065
-É
-Sganttproject-builder/dist-bin/plugins-2.8.10/org.ganttproject.chart.pert/plugin.xml,2\7\274445770fa1f3c1bde9980118fd58b1df71c513
-Ü
-Vganttproject-builder/dist-bin/plugins-2.8.10/org.ganttproject.impex.htmlpdf/plugin.xml,3\c\3cc67cc8bbe8a4bfc5e6480d50b18df2398e0c41

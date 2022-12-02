@@ -98,7 +98,7 @@ public class TaskTimeAlertAction extends TaskActionBase{
          int i = 0;
 
         String[][] rec = new String[selection.size()][3];
-        String[] header = {"tm.name", "tm.completed", "tm.days.left"};
+        String[] header = {getI18n("tm.name"), getI18n("tm.completed"), getI18n("tm.days.left")};
 
         GanttCalendar endDate;
         GregorianCalendar now = new GregorianCalendar();
