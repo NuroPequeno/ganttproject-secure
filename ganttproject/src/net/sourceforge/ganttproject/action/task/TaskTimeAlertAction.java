@@ -132,7 +132,6 @@ public class TaskTimeAlertAction extends TaskActionBase{
                          rec[i][2] = String.valueOf(-diff) + " days behind!";
                      }
                      i++;
-                     //tava com um problema no days left, já tratei. Aproveitei e mudei e alterei para esta forma entende-se melhor
                  }
 
 
