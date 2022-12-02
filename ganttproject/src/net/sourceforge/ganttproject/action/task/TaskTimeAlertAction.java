@@ -79,11 +79,10 @@ public class TaskTimeAlertAction extends TaskActionBase{
      @Override
     protected void run(List<Task> selection) throws Exception {
 
-        List<Date> endDates = new ArrayList<>();
-        GanttCalendar calendar;
+
         JPopupMenu menu = new JPopupMenu();
         Component c = tree.getTreeComponent();
-        menu.show(c,250,50);
+        menu.show(c,c.getBounds().width,0);
 
 
          Comparator<Task> endDateComparator = new Comparator<Task>() {
@@ -96,59 +95,42 @@ public class TaskTimeAlertAction extends TaskActionBase{
          Collections.sort(selection, endDateComparator);
 
 
-
-        int j = 0;
-        int i = 0;
-
-        //menu.add(showLineSeparator(0,35));
+         int i = 0;
 
         String[][] rec = new String[selection.size()][3];
-        String[] header = {"name", "completion %", "days left"};
-
+        String[] header = {"tm.name", "tm.completed", "tm.days.left"};
 
         GanttCalendar endDate;
         GregorianCalendar now = new GregorianCalendar();
 
-
         for(Task t: selection){
-            j= 0;
             endDate =  t.getEnd();
 
-            GregorianCalendar GregorianEnd = (GregorianCalendar)endDate;
-            long diff = (GregorianEnd.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24)+1;
+            long diff = (endDate.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24)+1;
 
-                 //JLabel label = new JLabel(t.getName()); // escrever na etiqueta o nome da tarefa
+                 if(t.getCompletionPercentage()<100) { //only display not completed tasks
 
-                 //only display not completed tasks
-                 if(t.getCompletionPercentage()<100) {
-                     rec[i][j++] = t.getName();
-                     rec[i][j++] = String.valueOf(t.getCompletionPercentage());
+                     rec[i][0] = t.getName();
+                     rec[i][1] = String.valueOf(t.getCompletionPercentage());
+
                      if(diff>0) {
-                         rec[i][j++] = String.valueOf(diff);
+                         rec[i][2] = String.valueOf(diff);
                      } else if(diff==0){
-                         rec[i][j++] = "today!";
+                         rec[i][2] = "today!";
                      } else {
-                         rec[i][j++] = "behind!";
+                         rec[i][2] = "behind!";
                      }
+                     i++;
                  }
 
 
-            //label.setLocation(0,40+30*i); // 30 tamanho da altura das letras + 30 descer trinta
-            //menu.add(panel);
-            i++;
-
         }
 
-
-
         JTable table = new JTable(rec,header);
-        //table.setRowSelectionAllowed(true);
-
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
         table.setEnabled(false);
         menu.add(table);
         menu.add(new JScrollPane(table));
-
         menu.setPopupSize(350, 200);
     }
 
