@@ -17,6 +17,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Collections;
 
@@ -102,25 +103,36 @@ public class TaskTimeAlertAction extends TaskActionBase{
 
         GanttCalendar endDate;
         GregorianCalendar now = new GregorianCalendar();
+         now.set(Calendar.HOUR_OF_DAY, 0);
+         now.set(Calendar.MINUTE, 0);
+         now.set(Calendar.SECOND, 0);
+         now.set(Calendar.MILLISECOND, 0);
 
         for(Task t: selection){
             endDate =  t.getEnd();
 
-            long diff = (endDate.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24)+1;
+            endDate.set(Calendar.HOUR_OF_DAY, 0);
+            endDate.set(Calendar.MINUTE, 0);
+            endDate.set(Calendar.SECOND, 0);
+            endDate.set(Calendar.MILLISECOND, 0);
+
+
+            long diff = ((endDate.getTimeInMillis() - now.getTimeInMillis())/ (1000*60*60*24))-1;
 
                  if(t.getCompletionPercentage()<100) { //only display not completed tasks
 
                      rec[i][0] = t.getName();
-                     rec[i][1] = String.valueOf(t.getCompletionPercentage());
+                     rec[i][1] = String.valueOf(t.getCompletionPercentage())+" %";
 
                      if(diff>0) {
-                         rec[i][2] = String.valueOf(diff);
+                         rec[i][2] = String.valueOf(diff)+ " days left";
                      } else if(diff==0){
-                         rec[i][2] = "today!";
+                         rec[i][2] = "due today!";
                      } else {
-                         rec[i][2] = "behind!";
+                         rec[i][2] = String.valueOf(-diff) + " days behind!";
                      }
                      i++;
+                     //tava com um problema no days left, já tratei. Aproveitei e mudei e alterei para esta forma entende-se melhor
                  }
 
 
